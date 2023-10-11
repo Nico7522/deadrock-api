@@ -36,4 +36,8 @@ Route.group(() => {
         Route.post("pages", "PagesController.store");
       })
       
-}).prefix("api");
+      Route.group(() => {
+        Route.post("manga", "MangasController.store");
+      });
+    }).prefix("api");
+    

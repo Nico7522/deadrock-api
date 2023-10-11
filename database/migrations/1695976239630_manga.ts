@@ -1,13 +1,12 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class Chapters extends BaseSchema {
-  protected tableName = 'chapters'
-
+export default class Manga extends BaseSchema {
+  protected tableName = 'manga'
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('chapter_number').notNullable();
-      table.integer('manga_id').unsigned().references('id').inTable('manga').notNullable();
+      table.string("title", 255).notNullable();
+      table.string("author", 50).notNullable();
       table.timestamps(true, true)
     })
   }

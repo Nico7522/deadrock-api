@@ -1,16 +1,23 @@
 import { DateTime } from 'luxon'
-import { BaseModel, HasMany, column, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, HasMany, belongsTo, column, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import Page from './Page';
+import Manga from './Manga';
 
 export default class Chapter extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
   @column()
-  public title: string;
+  public manga_id: number;
 
   @column()
-  public author: string;
+  public chapter_number: number;
+
+  @belongsTo(() => Manga, {
+    foreignKey: "manga_id",
+    serializeAs: "manga",
+  })
+  public manga: BelongsTo<typeof Manga>;
 
   @hasMany(() => Page, {
     foreignKey: "chapter_id"
